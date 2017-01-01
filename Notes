@@ -5,17 +5,54 @@ Purescript Book Notes
 
 * Removing args towards point-free style is called _eta conversion_.
 
+
 ### Data Types
 
 * JS types, module `Prim`: `Number`, `String`, `Boolean`, `Array`
 * PS types, module `Prim`: `Boolean`, `Int`, `Char`
 * Records: `let r = { s: "Foo", i: 17, n: 2.2 }`
 
+
 ### Functions
 
 * Prelude
+** (#)                  Reverse of ($), e.g.:
+                        `products # filter isInStock # groupBy style # head`
+** (<$>), (<#>)         Infix `map` and reversed args
 ** (<<<), (>>>)         Function (Semigroupoid) composition
 
-* Data.Function
-** (#)                  Reverse of ($), e.g.:
-                        `products # filter isInStock # groupBy productCategory`
+
+### Functors
+
+    class Functor f where
+        map :: forall a b. (a -> b) -> f a -> f b
+
+
+This does the obvious thing for lists, but also can be used to lift
+functions into operations on, e.g., Maybe:
+
+    map show [17, 21, 22]
+    map show Nothing
+    map show (Just 17)
+    map show $ head [17, 21, 22]
+
+Or for Tuples (pairs), we update the second entry:
+
+    instance functorTuple :: Functor (Tuple a) where
+        map f (Tuple x y) = Tuple x (f y)
+
+Those can all be viewed as "containers" of course, but how about for
+functions?
+  XXX I don't understand the ((->) r) below, which is maybe why I
+don't understand how this works.
+
+    class Semigroupoid a where
+        compose :: forall b c d. a c d -> a b c -> a b d
+    instance semigroupoidFn :: Semigroupoid (->) where
+        compose f g x = f (g x)
+    - f :: c -> d,  g :: b -> c;  compose gives us b -> d
+
+    class Functor f where
+        map :: forall a b. (a -> b) -> f a -> f b
+    instance functorFn :: Functor ((->) r) where
+        map = compose
