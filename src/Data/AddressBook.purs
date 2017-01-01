@@ -50,3 +50,19 @@ findEntry fname lname = head <<< filter filterEntry
         filterEntry :: Entry -> Boolean
         filterEntry e = e.firstName == fname && e.lastName == lname
 
+
+----------------------------------------------------------------------
+-- Sample Data
+
+curt  :: Entry
+curt  = { firstName: "Curt", lastName: "Sampson"
+        , address: { street: "Dogenzaka", city: "Shibuya", state: "Tokyo" } }
+
+scott :: Entry
+scott = { firstName: "Scott", lastName: "Sampson"
+        , address: { street: "Drury Lane", city: "Hammersmith", state: "London"
+        } }
+
+book  :: AddressBook
+book  = insertEntry curt $ insertEntry scott empty
+
