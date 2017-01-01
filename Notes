@@ -1,0 +1,12 @@
+Purescript Book Notes
+=====================
+
+### General FP Notes
+
+* Removing args towards point-free style is called _eta conversion_.
+
+### Data Types
+
+* JS types, module `Prim`: `Number`, `String`, `Boolean`, `Array`
+* PS types, module `Prim`: `Boolean`, `Int`, `Char`
+* Records: `let r = { s: "Foo", i: 17, n: 2.2 }`
