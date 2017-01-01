@@ -10,3 +10,12 @@ Purescript Book Notes
 * JS types, module `Prim`: `Number`, `String`, `Boolean`, `Array`
 * PS types, module `Prim`: `Boolean`, `Int`, `Char`
 * Records: `let r = { s: "Foo", i: 17, n: 2.2 }`
+
+### Functions
+
+* Prelude
+** (<<<), (>>>)         Function (Semigroupoid) composition
+
+* Data.Function
+** (#)                  Reverse of ($), e.g.:
+                        `products # filter isInStock # groupBy productCategory`

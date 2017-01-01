@@ -36,7 +36,8 @@ insertEntry :: Entry -> AddressBook -> AddressBook
 insertEntry = Cons
 
 findEntry :: String -> String -> AddressBook -> Maybe Entry
-findEntry fname lname book = head $ filter filterEntry book
+findEntry fname lname = head <<< filter filterEntry
+                 -- or  filter filterEntry >>> head
     where
         filterEntry :: Entry -> Boolean
         filterEntry e = e.firstName == fname && e.lastName == lname
