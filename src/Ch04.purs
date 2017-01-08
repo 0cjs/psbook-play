@@ -92,5 +92,8 @@ sumTo :: Int -> Int
 sumTo n = sum n 0
     where
         sum 0 acc = acc
-        sum n acc = sum (n-1) (acc+n)
+        sum m acc = sum (m-1) (acc+m)
+        -- We use `m` instead of `n` here to avoid the shadow warning,
+        -- but we should look into the wiki page for that error to see
+        -- how we might deal with this in a better way.
 
