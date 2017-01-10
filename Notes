@@ -1,17 +1,52 @@
 Purescript Book Notes
 =====================
 
-### General FP Notes
+## General FP Notes
 
 * Removing args towards point-free style is called _eta conversion_.
 
 
+Syntax
+------
+
+### Imports
+
+    import Prelude
+    import Math as M
+    import Mod (AType(..), BType(Cons2, Cons3), f, g, h)
+
+
 ### Data Types
+
+Keep in mind that `Array` is the JS type, not like Haskell.
 
 * JS types, module `Prim`: `Number`, `String`, `Boolean`, `Array`
 * PS types, module `Prim`: `Boolean`, `Int`, `Char`
 * Records: `let r = { s: "Foo", i: 17, n: 2.2 }`
 
+
+### Pattern Matching Literals
+
+    * `Number`, `String`, `Char`, `Boolean`.
+    * `_` matches binding to no name
+    * `Array`:
+        takeFive :: Array Int -> Int
+        takeFive [0, 1 a, b, _] = a * b
+        takeFive _ = 0
+      (Note: you cannot match arrays of unspecified length, "since
+      destructuring immutable arrays in these sorts of ways can lead
+      to poor performance.".)
+    * Record pattern matching: specify a binder on the right
+
+
+### Guards
+
+    gcd n m | n > m     = gcd (n-m) m
+            | otherwise = gcd n (m-n)
+
+
+Libs and Patterns
+-----------------
 
 ### Functions
 
