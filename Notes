@@ -16,6 +16,18 @@ Syntax
     import Mod (AType(..), BType(Cons2, Cons3), f, g, h)
 
 
+### Syntax
+
+* [] matches JS array but just in data, type is `Array a`
+* case expr of pat -> expr
+
+
+### Partial Functions
+
+* In psc partial pattern matches are an error (but not in psci!)
+* Typeclass `Partial` resolves the error
+
+
 ### Data Types
 
 Keep in mind that `Array` is the JS type, not like Haskell.
@@ -36,7 +48,11 @@ Keep in mind that `Array` is the JS type, not like Haskell.
       (Note: you cannot match arrays of unspecified length, "since
       destructuring immutable arrays in these sorts of ways can lead
       to poor performance.".)
-    * Record pattern matching: specify a binder on the right
+    * Record pattern matching
+        * specify a binder on the right: `{ name: n }`
+        * can be partial in types: `{ name: n | r }`
+        * pun with field name: `{ name }`
+    * Named patterns: prefix name with @: `arr@[hd, _]`, `rec@{ x, y }`
 
 
 ### Guards
